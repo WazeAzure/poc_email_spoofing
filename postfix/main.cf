@@ -1,0 +1,31 @@
+myhostname = mail.moirus.com
+mydomain = moirus.com
+myorigin = $mydomain
+inet_interfaces = all
+inet_protocols = ipv4
+mydestination = $myhostname, localhost.$mydomain, localhost, $mydomain
+
+# Open relay
+# smtpd_recipient_restrictions = permit_mynetworks, permit
+# smtpd_relay_restrictions = permit_mynetworks, permit
+# smtpd_recipient_restrictions = permit
+# smtpd_relay_restrictions = permit
+#smtpd_sasl_auth_enable = no
+
+smtpd_relay_restrictions = permit_mynetworks, reject_unauth_destination
+smtpd_recipient_restrictions = permit_mynetworks, reject_unauth_destination
+smtpd_sasl_auth_enable = no
+
+# mynetwork
+mynetworks = 0.0.0.0/0
+
+# Log to stdout
+maillog_file = /dev/stdout
+
+# Use Google DNS for reliable MX lookups
+smtp_host_lookup = dns
+resolver_config = /etc/resolv.conf
+
+# add missing headers if client omits them
+always_add_missing_headers = yes
+append_dot_mydomain = no
