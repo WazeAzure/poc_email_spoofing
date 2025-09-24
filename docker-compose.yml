@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  postfix:
+    image: ubuntu:22.04
+    container_name: openrelay
+    ports:
+      - "25:25"       # SMTP port accessible from anywhere
+    environment:
+      - MAIL_DOMAIN=yourdomain.com
+    volumes:
+      - ./postfix:/etc/postfix
+    restart: unless-stopped
+    tty: true
